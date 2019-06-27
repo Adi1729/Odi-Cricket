@@ -15,7 +15,14 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 \title{Odi Cricket Prediciton}
-\author{You}
+\author{Aditya Yadav\\ 
+\texttt{adiyadav.1729@gmail.com }\and
+Aniket Dhawad\\
+\texttt{aniketdhawadiitg1@gmail.com} \and
+Vikash Goyal \\
+\texttt{vikashgoyal2701@gmail.com}}
+
+
 
 \begin{document}
 \maketitle
@@ -29,17 +36,24 @@ The model was tested with different training dataset based on timeline. Result s
 
 One Day International(ODI) Cricket is one of the three formats which are played at International Level. International Cricket Council(ICC), governing body of cricket, has  currently 12  Full Team Members and 92 Associate Members. 
 ODI cricket started in 1971 as second form of cricket after test cricket to cater entertainment to larger set of spectators.In this format, both teams are allowed to play for fixed overs and the one with more runs is declared winner. Originally started with 60 overs and white jerseys, ODI cricket has gone through various transition over years  
-to stay relevant and consistently entertaning. 
+to stay relevant and consistently entertaning. 50 overs , powerplay overs, field restrictions, batting friendly grounds are among few significant changes that has played role in its evolution.
 
-\section{Somie examples to get started}
+Cricket World Cup, the most important tournament in this format generally played every 4 years, with preliminary qualification rounds leading up to a finals tournament. The tournament is one of the world's most viewed sporting events and is considered the "flagship event of the international cricket calendar" by the ICC.  World cup 2019 has 10 teams participating. In league round all 10 teams would be playing against each other. Top 4 would march into semi- finals. Winner of the semi-finalist would be playing for the coveted title. There would be 45 league matches, 2 semi- finals and 1 finals. This paper aimed at predicting the result of 48 matches.
 
-\subsection{How to add Comments}
+We collected data from cricinfo and relianceiccranking. Over 100 features which included players and teams features as well.  Pearson correlation, chi square test and recursive feature elimination were used for feature elimination. The selected features were used as inputs to three different classification algorithms: logistic regression,
+random forest, boosted decision trees. Ensemble of weak classifiers were also tested. Best performing model was selected as final one to predict the outcome.
 
-Comments can be added to your project by clicking on the comment icon in the toolbar above. % * <john.hammersley@gmail.com> 2014-09-03T09:54:16.211Z:
-%
-% Here's an example comment!
-%
-To reply to a comment, simply click the reply button in the lower right corner of the comment, and you can close them when you're done.
+
+\section{Methodolgy}
+
+\subsection{Data}
+
+Data was scrapped from www.espncricinfo.com. Firstly, list of all matches played was scrapped.  List of all players played for different country was also scrapped. Note that data had match\_id, player\_id which was key in getting different information
+at match and player level respectively. We used www.relianceiccrankings.com to collect information of player batting and bowling ranking at the start of every month from 1971 till date. 
+
+Therefore , for every match we had batting and bowling scorecard , player details at match level and their ranking. 
+
+
 
 \subsection{How to include Figures}
 
