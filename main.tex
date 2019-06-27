@@ -38,9 +38,9 @@ One Day International(ODI) Cricket is one of the three formats which are played 
 ODI cricket started in 1971 as second form of cricket after test cricket to cater entertainment to larger set of spectators.In this format, both teams are allowed to play for fixed overs and the one with more runs is declared winner. Originally started with 60 overs and white jerseys, ODI cricket has gone through various transition over years  
 to stay relevant and consistently entertaning. 50 overs , powerplay overs, field restrictions, batting friendly grounds are among few significant changes that has played role in its evolution.
 
-Cricket World Cup, the most important tournament in this format generally played every 4 years, with preliminary qualification rounds leading up to a finals tournament. The tournament is one of the world's most viewed sporting events and is considered the "flagship event of the international cricket calendar" by the ICC.  World cup 2019 has 10 teams participating. In league round all 10 teams would be playing against each other. Top 4 would march into semi- finals. Winner of the semi-finalist would be playing for the coveted title. There would be 45 league matches, 2 semi- finals and 1 finals. This paper aimed at predicting the result of 48 matches.
+Cricket World Cup, the most important tournament in this format generally played every 4 years, with preliminary qualification rounds leading up to a finals tournament. The tournament is one of the world's most viewed sporting events and is considered the "flagship event of the international cricket calendar" by the ICC.  World cup 2019 has 10 teams participating. In league round all 10 teams would be playing against each other. Top 4 would march into semi- finals. Winner of the semi-finalist would be playing for the coveted title. There would be 45 league matches, 2 semi-finals and 1 finals. This paper aimed at predicting the result of 48 matches.
 
-We collected data from cricinfo and relianceiccranking. Over 100 features which included players and teams features as well.  Pearson correlation, chi square test and recursive feature elimination were used for feature elimination. The selected features were used as inputs to three different classification algorithms: logistic regression,
+We collected data from cricinfo and relianceiccranking. Over 100 features were created which included players and teams features as well.  Pearson correlation, chi square test and recursive feature elimination were used for feature elimination. The selected features were used as inputs to three different classification algorithms: logistic regression,
 random forest, boosted decision trees. Ensemble of weak classifiers were also tested. Best performing model was selected as final one to predict the outcome.
 
 
@@ -48,25 +48,31 @@ random forest, boosted decision trees. Ensemble of weak classifiers were also te
 
 \subsection{Data}
 
-Data was scrapped from www.espncricinfo.com. Firstly, list of all matches played was scrapped.  List of all players played for different country was also scrapped. Note that data had match\_id, player\_id which was key in getting different information
+Data was scrapped from www.espncricinfo.com. Firstly, list of all matches played was scrapped. Secondly, list of all players played for different country was scrapped. Note that data had match\_id, player\_id which was key in getting different information
 at match and player level respectively. We used www.relianceiccrankings.com to collect information of player batting and bowling ranking at the start of every month from 1971 till date. 
 
-Therefore , for every match we had batting and bowling scorecard , player details at match level and their ranking. 
+Therefore, for every match we had batting and bowling scorecard, player details at match level and their ranking. 
 
 
 
-\subsection{How to include Figures}
+\subsection{Feature Engineering}
+\subsubsection{
+Player Level Features
+}
 
-First you have to upload the image file from your computer using the upload link in the project menu. Then use the includegraphics command to include it in your document. Use the figure environment and the caption command to add a number and a caption to your figure. See the code for Figure \ref{fig:frog} in this section for an example.
+Player Batting Average, Strike rate, Bowling Average , Bowling Economy, Bowling Strike Rate 
 
-\begin{figure}
-\centering
-\includegraphics[width=0.3\textwidth]{frog.jpg}
-\caption{\label{fig:frog}This frog was uploaded via the project menu.}
-\end{figure}
+Impact Feature
 
-\subsection{How to add Tables}
+Form factor/Quality Feature
 
+\subsubsection{Team Level features
+}
+
+\subsection{Modelling}
+ 
+ Feature Selection
+ 
 Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example. 
 
 \begin{table}
@@ -79,7 +85,7 @@ Gadgets & 13
 \caption{\label{tab:widgets}An example table.}
 \end{table}
 
-\subsection{How to write Mathematics}
+\subsection{Improvement }
 
 \LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
 \[S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
