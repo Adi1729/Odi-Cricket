@@ -66,8 +66,29 @@ Impact Feature
 
 Form factor/Quality Feature
 
+
+Batting:
+While comparing batsmen , generally batting average is used a metric to identify the batsmen in form. Though, it is reasonable to comparable batsmen on average when a considerable time period is taken into account. However, it does not give clear picture of batsmen form in last few( say 10) matches. For instance, a batsmen with score sequence  120,0,30,40,10  another with score 60,45,45,35 have batting average of 50. 
+
+Bowling:
+This metric was calculated to capture the form and consistency of the bowler in the recent few matches before the actual match. Bowler's economy, strike rate and average in the last 10 matches was taken into consideration while calculating this metric. 
+Example:
+Show data of last 10 matches of a particular inform bowler and a out of form bowler.
+
+
+
+
 \subsubsection{Team Level features
 }
+
+Team Strength:
+For every team, batting and bowling strength was calculated by considering the ratings of players of the team as per the ICC world rankings. The batting strength was calculated by taking the average rating of top 6 batsmen and bowling strength by taking the average rating of top 5 bowlers. We assumed the minimum rating  for player who was not present in the top 100 list.
+
+Pitch Weighted Team Strength:
+In order to take into the impact of the pitch, we tried to quantify whether the pitch was a high scoring or a low scoring one. We did this by calculating the average runs that are scored on a particular pitch. If the pitch was high scoring one, we increased the batting strength of a team by a particular factor and vice versa.
+
+Our thought behind this feature was that flat pitches give advantage to batsmen and reduce the advantage to bowlers.
+
 
 \subsection{Modelling}
  
