@@ -56,55 +56,110 @@ Therefore, for every match we had batting and bowling scorecard, player details 
 
 
 \subsection{Feature Engineering}
+
 \subsubsection{
-Player Level Features
+Basic Metrics
+}
+Players Batting Average, Strike rate, Bowling Average , Bowling Economy, Bowling Strike Rate was considered just before a match for which features were generated. \newline
+
+To compare like to like players from two teams, players role was identified.  That is, features were arranged such that openers from a team would be compared against openers from its opposition. Similarly, for bowleres , first change bowlers would be observed against similar role bowler from opposition team
+
+\subsubsection{
+Impact Factor
 }
 
-Player Batting Average, Strike rate, Bowling Average , Bowling Economy, Bowling Strike Rate 
-
-Impact Feature
-
-Form factor/Quality Feature
+This factor was created to compare players based on its quality rather than amount of runs scored/wickets taken.
+Impact features take into account the quality of opposition bowlers against which runs scored. A batsman scoring runs against a bowler who has a bowling average of 25 will have higher impact score compare to scoring runs against a bowling average of 35.
 
 
-Batting:
-While comparing batsmen , generally batting average is used a metric to identify the batsmen in form. Though, it is reasonable to comparable batsmen on average when a considerable time period is taken into account. However, it does not give clear picture of batsmen form in last few( say 10) matches. For instance, a batsmen with score sequence  120,0,30,40,10  another with score 60,45,45,35 have batting average of 50. 
+Similarly, Bowlers taking higher order wickets are given higher weightage for batsmen dismissed.  This could lead to a situation where bowler with a high average(or poor strike rate) can get higher weightage on wickets. Hence,  strike rate was taken into factor.
+\newline
+\[Impact Factor,Bowler = \frac{weighted sum of wickets}{wickets * strike rate}
+ 
 
-Bowling:
+\newline
+\begin{table}
+\centering
+\begin{tabular}{c|c}
+Wicket Order & Wicket Weight\\\hline
+ 1 & 1.5\\
+2  & 1.4 \\
+3 & 1.5 \\
+4 & 1.3 \\
+5 & 1.2\\
+6 & 0.9 \\
+7 & 0.7 \\
+8 & 0.5 \\
+9 & 0.5\\
+10  & 0.3 \\
+11 & 0.2 \\
+\end{tabular}
+\caption{\label{tab:widgets}Wickets Order and Weightage .}
+\end{table}
+
+Matt Henry till Feb 2019 had close to 45\% top order wickets(1-3) out of 78 batsmen he dismissed. 
+
+\begin{table}
+\centering
+\begin{tabular}{c|c|c|c|c|c}
+Players & Matcheds & Wkts & Weighted Wkts & SR & Impact\\\hline
+ Matt Henry & 43 & 78 & 91.2 & 28.7 & 1686\\
+ Lasith Malinga & 218 & 322 & 329 & 32.6 & 990
+\end{tabular}
+\caption{\label{tab:widgets}Impact Factor : Bowler.}
+\end{table}
+
+Top 3 batsman with highest impact before  2019 world cup\newline 
+Top 3 batsman with highest impact before 2015 world cup
+
+
+\subsubsection{
+Form Factor
+}
+
+{Batting}: \newline
+While comparing batsmen , generally batting average is used a metric to identify the batsmen in form. Though, it is reasonable to comparable batsmen on average when a considerable time period is taken into account. However, it does not give clear picture of batsmen form in last few( say 10) matches. For instance, a batsmen with score sequence  120,0,30,40,10  another with score 60,45,45,35 have batting average of 50. Though it is fair to assume second batsmen is more consistent. 
+
+In addition to runs scored, rate at which they are scored also play a crucial role in fate of a match. This is also taken in consideration to determine batsmen's recent form.
+
+For instance, before England's league match against India in world cup 2019,  Ben Stokes and Bairstow had following streaks. Bairstow is more of a consistent batsmen(2nd row) with a standard deviation of 33 , however comparing Stokes recent number with overall number, he is actually punching above his weight and thus had a higher form factor.
+
+\begin{table}
+\centering
+\begin{tabular}{c|c|c|c|c|c}
+Runs & Balls & Standard Deviation & Rec Avg * SR & Career Avg * SR  & Form Factor\\\hline
+ 89,82*,2,10*,6 & 115,89,6,6,7 & 43 & 5340 & 3672 & 2.1\\
+ 27,0,90,45,91  & 39,1,99,46,50 & 33 & 3861 & 4842 & 1.02
+\end{tabular}
+\caption{\label{tab:widgets}Form Factor.}
+\end{table}
+
+
+{Bowling}: \newline
 This metric was calculated to capture the form and consistency of the bowler in the recent few matches before the actual match. Bowler's economy, strike rate and average in the last 10 matches was taken into consideration while calculating this metric. 
 Example:
 Show data of last 10 matches of a particular inform bowler and a out of form bowler.
 
-
-
-
-\subsubsection{Team Level features
+\subsubsection{Team Strength
 }
 
-Team Strength:
 For every team, batting and bowling strength was calculated by considering the ratings of players of the team as per the ICC world rankings. The batting strength was calculated by taking the average rating of top 6 batsmen and bowling strength by taking the average rating of top 5 bowlers. We assumed the minimum rating  for player who was not present in the top 100 list.
 
 Pitch Weighted Team Strength:
-In order to take into the impact of the pitch, we tried to quantify whether the pitch was a high scoring or a low scoring one. We did this by calculating the average runs that are scored on a particular pitch. If the pitch was high scoring one, we increased the batting strength of a team by a particular factor and vice versa.
+In order to take into the impact of the pitch, we tried to quantify whether the pitch was a high scoring or a low scoring one. We did this by calculating the average runs that are scored on a particular pitch. If the pitch was high scoring one, we increased the batting strength of a team and reduce the bowling strength of a team by a particular factor..
 
-Our thought behind this feature was that flat pitches give advantage to batsmen and reduce the advantage to bowlers.
+Rationale behind this feature was that high scoring pitches are reasonably flat and give advantage to batsmen and reduce the advantage to bowlers.
 
 
 \subsection{Modelling}
  
+ {
  Feature Selection
+ }
  
-Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example. 
+ Over 120 features were created. 
+ 
 
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
 
 \subsection{Improvement }
 
